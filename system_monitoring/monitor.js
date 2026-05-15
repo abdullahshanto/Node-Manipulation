@@ -1,4 +1,5 @@
 import os from 'node:os';
+import chalk from 'chalk';
 
 let oldCPU = os.cpus();
 
@@ -13,6 +14,9 @@ function monitor(){
     });
 
     console.clear();
+
+    console.log(chalk.bgMagenta("system monitor"));
+
     console.table(usage);
 
     const totalMemoryInGB = os.totalmem() / (1024*1024*1024);
