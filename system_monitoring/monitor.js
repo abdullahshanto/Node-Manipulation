@@ -19,11 +19,27 @@ function monitor(){
 
     console.table(usage);
 
+    // Memory Information
     const totalMemoryInGB = os.totalmem() / (1024*1024*1024);
-    const usedMemory = totalMemoryInGB - (os.freemem() / (1024*1024*1024));
-    console.log(
-        `memory used : ${usedMemory.toFixed(3)} GB / ${totalMemoryInGB.toFixed(3)} GB`
-    );
+    const freeMemoryInGB = os.freemem() / (1024*1024*1024);
+    const usedMemory = totalMemoryInGB - freeMemoryInGB;
+    const memoryPercent = (usedMemory / totalMemoryInGB) * 100;
+    
+    let memoryColor = chalk.green;
+    if (memoryPercent > 85) memoryColor = chalk.red;
+    else if (memoryPercent > 60) memoryColor = chalk.yellow;
+
+    console.log(`Memory Usage: ${memoryColor(`${usedMemory.toFixed(2)} GB / ${totalMemoryInGB.toFixed(2)} GB (${memoryPercent.toFixed(1)}%)`)}`);
+
+    // System Information
+    const uptime = os.uptime();
+    const days = Math.floor(uptime / 86400);
+    const hours = Math.floor((uptime % 86400) / 3600);
+    const minutes = Math.floor((uptime % 3600) / 60);
+    const seconds = Math.floor(uptime % 60);
+
+    console.log(`System OS: ${chalk.cyan(`${os.type()} ${os.release()}`)}`);
+    console.log(`Uptime: ${chalk.cyan(`${days}d ${hours}h ${minutes}m ${seconds}s`)}`);
 
     oldCPU = newCPU; // Update oldCPU for the next tick
 }
