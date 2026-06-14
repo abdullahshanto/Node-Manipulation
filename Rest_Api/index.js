@@ -1,18 +1,19 @@
 import http from 'http'
 import handleReqRes from './ReqResHanles/handlereqres.js';
+import environment from './Handlers/environment.js';
 
 //modulo scaffolding
 
 const app={};
 
-app.config = {
-  port : 3000,
-}
+
 
 app.createserver = () =>{
   const server = http.createServer(app.handler);
-  server.listen(app.config.port , () =>{
-    console.log(`server listening to the port ${app.config.port}`);
+  server.listen(environment.port, () =>{
+
+    //console.log(`environment variable is : ${process.env.variable}`)
+    console.log(`server listening to the port ${environment.port}`);
   })
 }
 
