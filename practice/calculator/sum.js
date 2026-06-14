@@ -1,4 +1,0 @@
-const sum=(res,req)=>
-{
-  
-}
