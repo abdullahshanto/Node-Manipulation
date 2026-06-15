@@ -11,7 +11,7 @@ async function main() {
     const city = process.argv[2];
 
     if (!city) {
-      console.log("❌ Please provide a city name.");
+      console.log(" Please provide a city name.");
       console.log("Usage: npm start Dhaka");
       return;
     }
@@ -22,7 +22,7 @@ async function main() {
     const cachedData = getCachedWeather(normalizedCity);
 
     if (cachedData) {
-      console.log("✅ Using cached data\n");
+      console.log(" Using cached data\n");
 
       displayWeather(cachedData);
 
@@ -32,7 +32,7 @@ async function main() {
     }
 
     // API request
-    console.log("🌍 Fetching weather data...\n");
+    console.log(" Fetching weather data...\n");
 
     const weatherData = await fetchWeather(city);
 
@@ -45,9 +45,9 @@ async function main() {
   } catch (error) {
 
     if (error.response) {
-      console.log("❌ City not found.");
+      console.log(" City not found.");
     } else {
-      console.log("❌ Error:", error.message);
+      console.log(" Error:", error.message);
     }
 
     logRequest(`ERROR: ${error.message}`);
@@ -55,13 +55,13 @@ async function main() {
 }
 
 function displayWeather(data) {
-  console.log("========== WEATHER REPORT ==========");
-  console.log(`📍 City: ${data.name}`);
-  console.log(`🌡 Temperature: ${data.main.temp} °C`);
-  console.log(`☁ Weather: ${data.weather[0].description}`);
-  console.log(`💧 Humidity: ${data.main.humidity}%`);
-  console.log(`🌬 Wind Speed: ${data.wind.speed} m/s`);
-  console.log("====================================");
+  console.log(" WEATHER REPORT");
+  console.log(` City: ${data.name}`);
+  console.log(`🌡Temperature: ${data.main.temp} °C`);
+  console.log(` Weather: ${data.weather[0].description}`);
+  console.log(` Humidity: ${data.main.humidity}%`);
+  console.log(` Wind Speed: ${data.wind.speed} m/s`);
+  console.log("end");
 }
 
 main();
